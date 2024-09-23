@@ -1,0 +1,12 @@
+# Linear search 
+# It can be sorted or unsorted array
+
+nums = [3, 7, 2, 9, 5]
+target = 9
+
+for i in range(len(nums)):
+    if nums[i] != target:
+        continue
+    else:
+        print(i)
+
