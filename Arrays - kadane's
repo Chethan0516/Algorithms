@@ -1,0 +1,46 @@
+# kadane's algorithm Time: O(n), Space: 1(n)
+
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+cur_sum = max_sum = float("-inf")
+for num in nums:
+    cur_sum += num
+    if cur_sum < 0:
+        cur_sum = 0
+    max_sum = max(max_sum, cur_sum)
+
+print(max_sum)
+# ---------------------------------
+# Brute force Time: (n*n)
+
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+
+max_sum = nums[0]
+for i in range(len(nums)):
+    cur_sum = 0
+    for j in range(i, len(nums)):
+        cur_sum = cur_sum + nums[j]
+        max_sum = max(max_sum, cur_sum)
+
+print(max_sum)
+#---------------------------------
+#Sliding window 
+
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+
+max_sum = nums[0]
+L = 0 
+cur_sum = 0
+maxL, maxR = 0, 0
+
+for R in range(len(nums)):
+    if cur_sum < 0:
+        cur_sum = 0
+        L = R
+
+    cur_sum += nums[R]
+    if cur_sum > max_sum:
+        max_sum = cur_sum
+        maxL, maxR = L, R
+print(max_sum)
+print(maxL, maxR)
+
