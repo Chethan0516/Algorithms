@@ -1,0 +1,34 @@
+# Rabin karp       Time: O(m + n)   Space: O(1)
+
+def robin(text, pattern):
+
+    d = 256
+    q = 101
+    m = len(pattern)
+    n = len(text)
+    p = 0
+    t = 0
+    h = 1                   # pow(d * m -1) % q  or the for loop
+
+    for i in range(m - 1):  # it is needed as there will be large difference 
+        h = (h * d) % q
+
+    for i in range(m):
+        p = (d * p + ord(pattern[i])) % q         # hash value for pattern
+        t = (d * t + ord(text[i])) % q            # hash value for text
+
+    for i in range(n - m + 1):
+        if p == t:
+            if text[i:i+m] == pattern:
+                print(i)
+
+        if i< n - m:
+            t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q    # it will add next text and remove first occurance
+
+            if t< 0:        # there will be negative values for t, if t is smaller than next text value
+                t += q      # helps to be in positive
+
+
+text = "abcpqrabcxyz"
+pattern = "abc"
+robin(text, pattern)
