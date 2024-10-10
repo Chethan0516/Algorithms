@@ -1,0 +1,52 @@
+# Longest common substring between two strings using KMP
+
+def common_substring(str1, str2):
+
+    # considering str1 for lps table
+    def LPS(str1):
+
+        lps = [0] * len(str1)
+        length, i = 0, 1
+
+        while i<len(str1):
+            if str1[length] == str1[i]:
+                length += 1
+                i += 1
+                lps[i] = length	
+            else:
+                if length != 0:
+                    length = lps[length - 1]
+                else:
+                    lps[i] = 0
+                    i += 1
+
+        return lps
+    
+    lps = LPS(str1)
+    max_len = 0
+    longest_string = ""
+
+    for i in range(len(str2)):
+        pattern = str2[i:]          # taking from 0 assigning letters to pattern and verifying the pattern
+        j = 0
+        k = 0
+
+        while k < len(pattern):
+            if pattern[k] == str1[j]:
+                j += 1
+                k += 1
+
+                if j > max_len:
+                    max_len = j
+                    longest_string = str1[:j]     # it is the longest common substring
+            else:
+                if j != 0:
+                    j = lps[j - 1]
+                else:
+                    k += 1
+
+    return longest_string
+
+str1 = "abcde"
+str2 = "ababcde"
+print(common_substring(str1, str2))
