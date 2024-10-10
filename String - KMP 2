@@ -1,0 +1,27 @@
+# complexity: O(M)
+# $ Repeated substring
+# $$ Question: Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
+
+def substring(pattern):
+    if len(pattern) == 0:
+        return 0
+    lps = [0] * len(pattern)
+    length, i = 0, 1
+
+    while i< len(pattern):
+        if pattern[length] == pattern[i]:
+            length += 1
+            lps[i] = length
+            i += 1
+        else:
+            if length != 0:
+                length = lps[length - 1]
+            else:
+                lps[i] = 0
+                i += 1
+    num = lps[-1]
+    return num > 0 and len(pattern) % (len(pattern) - num) == 0
+
+
+pattern = "abab"
+print(substring(pattern))
