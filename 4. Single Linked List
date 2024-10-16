@@ -38,6 +38,42 @@ llist.print_list()
 or
 
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SingleLinked:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_data = Node(data)
+        if not self.head:
+            self.head = new_data
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_data
+
+    def __str__(self):
+        cur = self.head
+        values = []
+        while cur:
+            values.append(str(cur.data))
+            cur = cur.next
+        return "-->".join(values) + "--> None"
+
+llist = SingleLinked()
+llist.append(10)
+llist.append(20)
+print(llist)
+
+
+or
+
+
 
 
 class Node:
