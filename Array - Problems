@@ -1,0 +1,235 @@
+# find the first occurance
+
+def first(arr, num):
+
+    for i in range(len(arr)):
+        if arr[i] == num:
+            return i
+
+    return -1
+
+if __name__ == "__main__":
+    arr = [2, 4, 1, 7, 4, 5]
+
+    print(first(arr, 4))
+
+
+--------------------------------
+find the maximum value in the array
+
+def find(arr):
+    max_value = 0
+    for i in range(1, len(arr)):
+        max_value = max(max_value, arr[i])
+    return max_value
+
+
+
+if __name__ == "__main__":
+    arr = [5, 1, 9, 3, 7]
+    print(find(arr))
+-------------------------------------
+
+occurance of element in array
+
+def count_(arr, target):
+    count = 0
+    for i in range(len(arr)):
+        if arr[i] == target:
+            count += 1
+
+    return count
+if __name__ == "__main__":
+    arr = [1, 3, 7, 3, 3, 4]
+    print(count_(arr, 3))
+---------------------------
+check if an array is sorted
+
+def is_sorted(arr):
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+    return True
+
+if __name__ == "__main__":
+    arr = [1, 2, 3, 4, 5]
+    print(is_sorted(arr))
+
+------------------------------------
+find second largest element
+
+def second_(arr):
+
+    first = second = float("-inf")
+    for num in arr:
+        if num > first:
+            second = first
+            first = num
+        elif num > second and num != first:  # [4, 4, 2] then 2>second and != first
+            second = num
+    return second
+if __name__ == "__main__":
+    arr = [3, 6, 8, 2, 7]
+    print(second_(arr))
+--------------------------------------------
+missing num in arrar
+
+def find_missing(arr, num):
+    total_sum = num * (num + 1) // 2  # expected sum from 1 - 5 = 15
+    return total_sum - sum(arr)
+
+if __name__ == "__main__":
+    arr = [1, 2, 4, 5]
+    print(find_missing(arr, 5))
+-------------------------------------------
+find all places of an element
+
+def find(arr, target):
+    places = []
+
+    for i in range(len(arr)):
+        if arr[i] == target:
+            places.append(i)
+
+        # (or)
+
+    i = 0
+    while i < len(arr):
+        if arr[i] == target:
+            places.append(i)
+        i += 1
+
+
+    return places
+
+if __name__ == "__main__":
+    arr = [1, 3, 7, 3, 3, 5]
+    print(find(arr, 3))
+------------------------------------
+smallest positive integer missing
+
+def find(arr):
+    s = set(arr)
+    i = 1
+    while i in s:
+        i += 1
+    return i
+if __name__ == "__main__":
+    arr = [3, 4, -1, 1]
+    print(find(arr))
+-------------------------------------
+search element in 2d matrix
+
+def search(matrix, target):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if matrix[i][j] == target:
+                return (i, j)
+    return -1
+
+if __name__ == "__main__":
+    matrix = [[10, 20, 30], [40, 50, 60], [70, 80, 90]]
+    print(search(matrix, 50))
+------------------------------------------------------
+majority n / 2
+
+def majority(arr):
+    count = 0
+    candidate = None
+
+    for num in arr:
+        if count == 0:
+            candidate = num
+            count += (1 if num == candidate else -1)
+        return candidate if arr.count(candidate) > len(arr) // 2 else -1 
+
+
+if  __name__ == "__main__":
+    arr = [2, 2, 1, 1, 2, 2, 2]
+    print(majority(arr))
+-----------------------------------------------------------
+search insert position
+
+def search(arr, target):
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] <  target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
+
+
+
+if __name__ == "__main__":
+    arr = [1, 3, 5, 6]
+    print(search(arr, 2))
+----------------------------------------------
+find the peak element 
+
+
+def findpeak(nums):
+
+    left, right = 0, len(nums) - 1
+
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+
+    return left
+
+print(findpeak([1, 2, 3, 1]))
+------------------------------------------
+minimum in rotated sorted array
+
+def findmin(nums):
+
+    left, right = 0, len(nums) - 1
+
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[right]:
+            left = mid + 1
+        else:
+            right = mid
+
+    return nums[left]
+
+print(findmin([3, 4, 5, 1, 2]))
+-----------------------------------------
+search minimum sorted array
+
+def find(arr, target):
+
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[left] <= arr[mid]:  # left half
+            if arr[left] <= target < arr[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:                       # right half
+            if arr[mid] <= target < arr[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+
+    return -1
+
+arr = [4, 5, 6, 7, 0, 1, 2]
+target = 0
+print(find(arr, target))
+----------------------------------------------
+
